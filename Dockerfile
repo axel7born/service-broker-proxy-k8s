@@ -9,6 +9,12 @@ FROM golang:1.11.2-alpine3.8 AS builder
 # RUN apk --no-cache add git
 # RUN go get github.com/golang/dep/cmd/dep
 
+RUN apk add  \
+		bash \
+		gcc \
+		musl-dev \
+		openssl
+
 # Directory in workspace
 WORKDIR "/go/src/github.com/Peripli/service-broker-proxy-k8s"
 
@@ -18,7 +24,8 @@ WORKDIR "/go/src/github.com/Peripli/service-broker-proxy-k8s"
 
 # Copy and build source code
 COPY . ./
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o /main main.go
+
+RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o /main main.go
 
 ########################################################
 # Build the runtime container
