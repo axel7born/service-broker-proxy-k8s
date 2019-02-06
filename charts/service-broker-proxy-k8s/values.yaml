@@ -8,6 +8,7 @@ image:
   repository: quay.io/service-manager/sb-proxy-k8s
   tag: master
   pullPolicy: Always
+  secret: image-pull-secret
 
 service:
   type: ClusterIP
