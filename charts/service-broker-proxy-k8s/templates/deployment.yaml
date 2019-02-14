@@ -44,7 +44,7 @@ spec:
         - name: K8S_SECRET_NAMESPACE
           value: {{ .Release.Namespace }}
         - name: APP_URL
-          value: {{ template "service-broker-proxy.fullname" . }}.{{ .Release.Namespace }}:{{ .Values.service.port }}
+          value: http://{{ template "service-broker-proxy.fullname" . }}.{{ .Release.Namespace }}:{{ .Values.service.port }}
         - name: APP_USERNAME
           valueFrom:
             secretKeyRef:
